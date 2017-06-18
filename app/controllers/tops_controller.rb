@@ -5,9 +5,22 @@ class TopsController < ApplicationController
   # GET /tops.json
   def index
 		require 'mechanize'
-		agent = Mechanize.new
-		page = agent.get("https://rakuma.rakuten.co.jp/home/")
-		p page
+		require 'open-uri'
+		require 'nokogiri'
+		require 'selenium-webdriver'
+		require 'pp'
+		#driver = Selenium::WebDriver.for :firefox # ブラウザ起動
+		ua = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/27.0.1453.116 Safari/537.36"
+		caps = Selenium::WebDriver::Remote::Capabilities.chrome("chromeOptions" => {binary: '/usr/bin/google-chrome-beta', args: ["--headless", "--disable-gpu", "--user-agent=#{ua}", "window-size=1280x800"]})
+		driver = Selenium::WebDriver.for :chrome, desired_capabilities: caps
+		driver.navigate.to 'https://rakuma.rakuten.co.jp/home/' # URLを開く
+		#driver.switch_to.frame(1)               # 1つめの子フレームに移動
+		#driver.switch_to.frame("frameid")       # フレームのnameを指定して移動
+		#
+		puts element.text
+		#agent = Mechanize.new
+		#page = agent.get("https://rakuma.rakuten.co.jp/search/?keyword=mac")
+		#p page
 		#nokogiri--------------------------------------
 		#require 'open-uri'
 		#require 'nokogiri'
