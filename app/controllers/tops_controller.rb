@@ -4,22 +4,25 @@ class TopsController < ApplicationController
   # GET /tops
   # GET /tops.json
   def index
-		#agent = Mechanize.new
-		#page = agent.get("https://rakuma.rakuten.co.jp/home/")
-		#p page	
-		require 'open-uri'
-		require 'nokogiri'
-		url = 'https://rakuma.rakuten.co.jp/home/'
-		charset = nil
-		html = open(url) do |f|
-			  charset = f.charset # 文字種別を取得
-				  f.read # htmlを読み込んで変数htmlに渡す
-		end
+		require 'mechanize'
+		agent = Mechanize.new
+		page = agent.get("https://rakuma.rakuten.co.jp/home/")
+		p page
+		#nokogiri--------------------------------------
+		#require 'open-uri'
+		#require 'nokogiri'
+		#url = 'https://rakuma.rakuten.co.jp/home/'
+		#charset = nil
+		#html = open(url) do |f|
+		#	  charset = f.charset # 文字種別を取得
+		#		  f.read # htmlを読み込んで変数htmlに渡す
+		#end
 		# htmlをパース(解析)してオブジェクトを生成
-		doc = Nokogiri::HTML.parse(html, nil, charset)
+		#doc = Nokogiri::HTML.parse(html, nil, charset)
 		# タイトルを表示
-		puts "----------------------"
-		p doc.title
+		#puts "----------------------"
+		#p doc.title
+		##------------------------------------------------
     @tops = Top.all
   end
 
